@@ -6,5 +6,6 @@ public interface CategoryIService {
 	Category addCategory (Category category);
 	Book addBook (Book book);
 	Book btoC(int cid,int bid);
+	public Category UpdateCategory(Category c);
 
 }

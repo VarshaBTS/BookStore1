@@ -33,7 +33,7 @@ public class Category {
 	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
 
-	public long getCategoryId() {
+	public int getCategoryId() {
 		return CategoryId;
 	}
 

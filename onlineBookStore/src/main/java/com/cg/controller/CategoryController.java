@@ -34,10 +34,16 @@ public class CategoryController {
 			return b;
 		}
 	
-	@PutMapping("/test/{CategoryId}/{book_id}")
+	@PutMapping("/assignBookToCat/{CategoryId}/{book_id}")
 	public Book assignbooktoC(@PathVariable(value="CategoryId")int CategoryId,
 			@PathVariable(value="book_id")int book_id) {
 		return service.btoC(CategoryId, book_id);
+		
+	}
+	
+	@PutMapping("/UpdateCategory")
+	public Category updateC(@RequestBody Category category) {
+		return service.UpdateCategory(category);
 		
 	}
 	

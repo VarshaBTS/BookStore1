@@ -30,13 +30,22 @@ public class CategoryService implements CategoryIService {
 
 	@Override
 	public Book btoC(int cid, int bid) {
-		// TODO Auto-generated method stub
+		
 		Book b=dao1.getOne(bid);
 		if(b!=null) {
 			Category c=dao.getOne(cid);
 			b.setCategory(c);
 		}
 		return dao1.save(b);
+	}
+
+	@Override
+	public Category UpdateCategory(Category c) {
+		Category ct=dao.getOne(c.getCategoryId());
+		if(ct!=null) {
+			ct.setCategoryName(c.getCategoryName());
+		}
+		return dao.save(ct);
 	}
 	
 
