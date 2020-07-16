@@ -1,8 +1,13 @@
 package com.cg.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,6 +50,33 @@ public class CategoryController {
 	public Category updateC(@RequestBody Category category) {
 		return service.UpdateCategory(category);
 		
+	}
+	
+	@GetMapping("/category/{CategoryId}")
+	private Optional<Category> getCategory(@PathVariable("CategoryId") int CategoryId) {
+		Optional<Category> cat=service.getCategoryById(CategoryId);
+		return cat;
+		
+	}
+	
+	@GetMapping("/GetAllCategory")
+	private ResponseEntity<List<Category>> getAllCategory() {
+		List<Category> catlist = service.getAllCategory();
+		return new ResponseEntity<List<Category>>(catlist, new HttpHeaders(), HttpStatus.OK);
+
+	}
+	
+	@PutMapping("/UpdateBook")
+	public Book updateBook(@RequestBody Book book) {
+		Book b = service.updateBook(book);
+		return b;
+	}
+	
+	@GetMapping("/GetAllBook")
+	private ResponseEntity<List<Book>> getAllBook() {
+		List<Book> booklist = service.listOfBook();
+		return new ResponseEntity<List<Book>>(booklist, new HttpHeaders(), HttpStatus.OK);
+
 	}
 	
 	

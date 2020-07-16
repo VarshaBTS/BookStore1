@@ -1,5 +1,8 @@
 package com.cg.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,41 @@ public class CategoryService implements CategoryIService {
 		}
 		return dao.save(ct);
 	}
+
+	@Override
+	public Optional<Category> getCategoryById(int cid) {
+		
+		return dao.findById(cid);
+	}
+
+	@Override
+	public List<Category> getAllCategory(){
+		return dao.findAll();
+	}
+
+	@Override
+	public Book updateBook(Book book) {
+		Book b=dao1.getOne(book.getBook_id());
+		if(b!=null)
+		{
+			b.setTitle(book.getTitle());
+			b.setAuthor(book.getAuthor());
+			b.setDescription(book.getDescription());
+			b.setISBN(book.getISBN());
+			b.setPrice(book.getPrice());
+			b.setPublished_Date(book.getPublished_Date());
+			b.setIcon(book.getIcon());
+		}
+		return dao1.save(b);
+	}
+
+	@Override
+	public List<Book> listOfBook() {
+		// TODO Auto-generated method stub
+		return dao1.findAll();
+	}
+	
+	
 	
 
 
