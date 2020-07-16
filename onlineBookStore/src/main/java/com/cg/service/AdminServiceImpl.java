@@ -15,13 +15,14 @@ import com.cg.entity.Category;
 
 @Service
 @Transactional
-public class CategoryService implements CategoryIService {
+public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private CategoryDao dao;
 	
 	@Autowired
 	private BookyDao dao1;
 	
+	@Override
 	public Category addCategory(Category category) {
 	return dao.save(category);
 	}

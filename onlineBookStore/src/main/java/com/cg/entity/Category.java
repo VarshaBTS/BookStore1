@@ -56,6 +56,15 @@ public class Category {
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
+
+	public Category() {}
+	public Category(int categoryId, String categoryName, List<Book> books) {
+		
+		CategoryId = categoryId;
+		CategoryName = categoryName;
+		this.books = books;
+	}
+	
 	
 	
 

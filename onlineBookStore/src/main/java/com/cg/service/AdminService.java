@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.cg.entity.Book;
 import com.cg.entity.Category;
-public interface CategoryIService {
+public interface AdminService {
 	Category addCategory (Category category);
 	Book addBook (Book book);
 	Book btoC(int cid,int bid);
