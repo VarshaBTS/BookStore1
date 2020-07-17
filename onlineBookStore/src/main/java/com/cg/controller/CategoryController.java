@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.cg.entity.Book;
 import com.cg.entity.Category;
 import com.cg.service.AdminService;
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/bookstore")
 public class CategoryController {
 	@Autowired
 	private AdminService service;
@@ -65,6 +66,14 @@ public class CategoryController {
 
 	}
 	
+	@DeleteMapping(path="/deleteCat/{CategoryId}")
+	public ResponseEntity<String> removeCategory(@PathVariable int CategoryId) {
+		
+		ResponseEntity<String> rs =  new ResponseEntity<String>(service.removeCategory(CategoryId),HttpStatus.OK);
+		
+		return rs;
+	} 
+	
 	@PutMapping("/UpdateBook")
 	public Book updateBook(@RequestBody Book book) {
 		Book b = service.updateBook(book);
@@ -77,6 +86,14 @@ public class CategoryController {
 		return new ResponseEntity<List<Book>>(booklist, new HttpHeaders(), HttpStatus.OK);
 
 	}
+	
+	@DeleteMapping(path="/deleteBook/{book_id}")
+	public ResponseEntity<String> removeBook(@PathVariable int book_id) {
+		
+		ResponseEntity<String> rs =  new ResponseEntity<String>(service.removeBook(book_id),HttpStatus.OK);
+		
+		return rs;
+	} 
 	
 	
 }
