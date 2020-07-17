@@ -22,13 +22,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="book")
 public class Book {
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	//@ManyToOne
-	//@JsonIgnore
-	//@JoinColumn(name="CategoryId")
+	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(targetEntity=Category.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="CategoryName")
+	@JoinColumn(name="CategoryId")
 	public Category category;
 	
 	@Id

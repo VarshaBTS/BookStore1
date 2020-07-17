@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.dao.BookyDao;
+import com.cg.dao.BookDao;
 import com.cg.dao.CategoryDao;
 import com.cg.entity.Book;
 import com.cg.entity.Category;
@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService {
 	private CategoryDao dao;
 	
 	@Autowired
-	private BookyDao dao1;
+	private BookDao dao1;
 	
 	private static final String ACTION_1 = "Exception while writing data to persistant layer";
 	

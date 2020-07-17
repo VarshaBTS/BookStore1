@@ -42,23 +42,18 @@ class OnlineBookStoreApplicationTests {
 	@Test
 	public void UpdateCategoryTest() {
 		Category c=new Category(101,"Horror",null);
-		as.addCategory(c);
 		c.setCategoryName("fantasy");
 		as.UpdateCategory(c);
-		//verify(crep,times(1)).save(c);
 		assertEquals("fantasy",c.getCategoryName());
 	}
 	
+	 @Test
+	 public void removeCategoryTest(){
+	 Category c=new Category(101,"horror",null);
+	 crep.delete(c);
+        verify(crep,times(1)).delete(c);
+	 }
 	
-	/*
-	@Test
-	public void removeCategoryTest() {
-		Category c=new Category(101,"Horror",null);
-		as.removeCategory(c.getCategoryId());
-		verify(crep,times(1)).delete(c);
-		
-	}
-	*/
 	
 	
 

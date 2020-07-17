@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.cg.entity.Book;
 
 @Repository
-public interface BookyDao extends JpaRepository<Book, Integer>{
+public interface BookDao extends JpaRepository<Book, Integer>{
 
 }

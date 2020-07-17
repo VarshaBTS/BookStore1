@@ -25,10 +25,6 @@ public class Category {
 	@Column(length=50)
 	public String CategoryName;
 	
-	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name="CategoryId")
-	//@ManyToOne(optional = false)
-    //@JoinColumn(name="book_id")
 	@JsonBackReference
 	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
