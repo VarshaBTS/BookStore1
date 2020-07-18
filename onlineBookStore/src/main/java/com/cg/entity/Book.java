@@ -15,7 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -48,12 +48,7 @@ public class Book {
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] icon;
 	
-	/*public Category getCategory() {
-		return Category;
-	}
-	public void setCategory(Category category) {
-		Category = category;
-	}*/
+	
 	
 	public Category getCategory() {
 		return category;

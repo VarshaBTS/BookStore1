@@ -27,7 +27,7 @@ public class CategoryController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<String> addCategory(@RequestBody Category category ) {
-			Category cat=service.addCategory(category);
+			service.addCategory(category);
 			ResponseEntity<String> responseEntity = new ResponseEntity<String>("added succesfully",HttpStatus.OK);
 			return responseEntity;
 		}
@@ -53,14 +53,14 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/category/{CategoryId}")
-	private Optional<Category> getCategory(@PathVariable("CategoryId") int CategoryId) {
+	public Optional<Category> getCategory(@PathVariable("CategoryId") int CategoryId) {
 		Optional<Category> cat=service.getCategoryById(CategoryId);
 		return cat;
 		
 	}
 	
 	@GetMapping("/GetAllCategory")
-	private ResponseEntity<List<Category>> getAllCategory() {
+	public ResponseEntity<List<Category>> getAllCategory() {
 		List<Category> catlist = service.getAllCategory();
 		return new ResponseEntity<List<Category>>(catlist, new HttpHeaders(), HttpStatus.OK);
 
@@ -81,7 +81,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/GetAllBook")
-	private ResponseEntity<List<Book>> getAllBook() {
+	public ResponseEntity<List<Book>> getAllBook() {
 		List<Book> booklist = service.listOfBook();
 		return new ResponseEntity<List<Book>>(booklist, new HttpHeaders(), HttpStatus.OK);
 

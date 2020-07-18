@@ -12,9 +12,9 @@ import com.cg.dao.BookDao;
 import com.cg.dao.CategoryDao;
 import com.cg.entity.Book;
 import com.cg.entity.Category;
-import com.cg.exceptions.BookException;
+
 import com.cg.exceptions.CategoryException;
-import com.cg.exceptions.CategoryProjectException;
+
 import com.cg.exceptions.ErrorCode;
 
 @Service

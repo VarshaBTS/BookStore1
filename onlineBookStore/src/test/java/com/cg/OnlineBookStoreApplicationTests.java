@@ -3,6 +3,10 @@ package com.cg;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -30,8 +34,8 @@ class OnlineBookStoreApplicationTests {
 	
 	@MockBean
 	CategoryDao crep;
-	@Mock
-	private BookDao bd;
+	@MockBean
+	BookDao bd;
 	
 	@Before
 	public void init() {
@@ -52,30 +56,34 @@ class OnlineBookStoreApplicationTests {
 	  assertEquals("The Subtle art",b.getTitle());
 	  }
 	  
-	  @Test
-	public void removeBookTest(){ 
-		Book b=new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
-		bd.findById(201);
-		crep.delete(b);
-        verify(crep,times(1)).delete(b);
-	}
-	/*
+//	  @Test
+//	public void removeBookTest(){ 
+//		Book b=new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
+//		bd.findById(201);
+//		crep.delete(b);
+//        verify(crep,times(1)).delete(b);
+//	}
+	
 	@Test
-	public void getAllBooksTest() {
-		List<BookInfo> bookinfo=new ArrayList<>();
-		bookinfo.add(null);
-		bookinfo.add(null);
-		Mockito.when(bd.getBookNames()).thenReturn(bookinfo);
+	public void listOfBookTest() {
+		List<Book> bookinfo=new ArrayList<Book>();
+		bookinfo.add(new Book(110,"The Subtle art","siri","breathtaking experience",1123,200));
+		bookinfo.add(new Book(111,"The Subtle","siriiii","breathtaking experience",1124,200));
+		when(bd.findAll()).thenReturn(bookinfo);
+		List<Book> result = as.listOfBook();
+		assertEquals(2, result.size());
 		
-		List<BookInfo> returnedData=bd.getBookNames();
-		assertEquals(2,returnedData.size());
 	}
 	@Test
 	public void getAllCategoryTest(){
-	
-	}
-	 */
-	
+			List<Category> CategoryList = new ArrayList<Category>();
+		    CategoryList.add(new Category(201,"Horror",null));
+			CategoryList.add(new Category(202,"Thriller ",null));
+			when(crep.findAll()).thenReturn(CategoryList);
+			
+			List<Category> result = as.getAllCategory();
+			assertEquals(2, result.size());
+		}
 	  
 	@Test
 	public void UpdateCategoryTest() {
@@ -93,12 +101,12 @@ class OnlineBookStoreApplicationTests {
 	 }
 	 
 	 @Test
-		public void updateBookTest() throws java.text.ParseException{
+	 public void updateBookTest() throws java.text.ParseException{
 			Book b= new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
 			bd.findById(201);
 			bd.save(b);
 			verify(bd,Mockito.times(1)).save(b);
-		}
+	 }
 	
 	
 	

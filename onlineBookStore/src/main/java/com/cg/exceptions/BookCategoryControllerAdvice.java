@@ -15,6 +15,7 @@ public class BookCategoryControllerAdvice {
 
     private static final Logger LOG = LoggerFactory.getLogger(BookCategoryControllerAdvice.class);
 
+  
     @ExceptionHandler(BookException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
