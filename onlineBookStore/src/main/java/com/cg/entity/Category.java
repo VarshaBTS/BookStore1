@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="category1")
@@ -25,7 +26,7 @@ public class Category {
 	@Column(length=50)
 	public String CategoryName;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
 
@@ -45,6 +46,7 @@ public class Category {
 		CategoryName = categoryName;
 	}
 
+	@JsonIgnore
 	public List<Book> getBooks() {
 		return books;
 	}

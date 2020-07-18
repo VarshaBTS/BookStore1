@@ -110,6 +110,21 @@ public class Book {
 	public void setIcon(byte[] icon) {
 		this.icon = icon;
 	}
+	public Book(int book_id, String title, String author, String description, int iSBN, float price
+			) {
+		super();
+		this.book_id = book_id;
+		this.title = title;
+		this.author = author;
+		this.description = description;
+		ISBN = iSBN;
+		this.price = price;
+		
+		
+	}
+	public Book() {
+		super();
+	}
 	
 
 }

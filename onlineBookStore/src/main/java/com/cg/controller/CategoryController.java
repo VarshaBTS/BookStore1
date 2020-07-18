@@ -26,10 +26,10 @@ public class CategoryController {
 	private AdminService service;
 	
 	@PostMapping("/create")
-	public Category addCategory(@RequestBody Category category ) {
+	public ResponseEntity<String> addCategory(@RequestBody Category category ) {
 			Category cat=service.addCategory(category);
-			//ResponseEntity<Category> responseEntity = new ResponseEntity<Category>(cat,HttpStatus.OK);
-			return cat;
+			ResponseEntity<String> responseEntity = new ResponseEntity<String>("added succesfully",HttpStatus.OK);
+			return responseEntity;
 		}
 
 	

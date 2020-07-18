@@ -7,13 +7,17 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.cg.dao.BookDao;
 import com.cg.dao.CategoryDao;
+import com.cg.entity.Book;
 import com.cg.entity.Category;
 import com.cg.service.AdminService;
 
@@ -26,6 +30,8 @@ class OnlineBookStoreApplicationTests {
 	
 	@MockBean
 	CategoryDao crep;
+	@Mock
+	private BookDao bd;
 	
 	@Before
 	public void init() {
@@ -53,6 +59,14 @@ class OnlineBookStoreApplicationTests {
 	 crep.delete(c);
         verify(crep,times(1)).delete(c);
 	 }
+	 
+	 @Test
+		public void updateBookTest() throws java.text.ParseException{
+			Book b= new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
+			bd.findById(201);
+			bd.save(b);
+			verify(bd,Mockito.times(1)).save(b);
+		}
 	
 	
 	
