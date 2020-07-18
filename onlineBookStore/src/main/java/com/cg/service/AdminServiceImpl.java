@@ -34,12 +34,11 @@ public class AdminServiceImpl implements AdminService {
 	            try {
 		       dao.save(category);
 	            } catch (Exception e) {
-	                throw new CategoryProjectException(ErrorCode.SYSTEM_EXCEPTION, ACTION_1, e);
+	                throw new CategoryException(ErrorCode.SYSTEM_EXCEPTION, ACTION_1, e);
 	            }
-	            return category;
+	         
 	        }
-	        throw new CategoryException(ErrorCode.BAD_DATA, "Valid date is required");
-		
+		   return category;
 	}
 
 	@Override
@@ -48,11 +47,12 @@ public class AdminServiceImpl implements AdminService {
             try {
 		     dao1.save(book);
             } catch (Exception e) {
-                throw new CategoryProjectException(ErrorCode.SYSTEM_EXCEPTION, ACTION_1, e);
+                throw new CategoryException(ErrorCode.SYSTEM_EXCEPTION, ACTION_1, e);
             }
-		return book;
+		
 		 }
-        throw new CategoryException(ErrorCode.BAD_DATA, "Valid date is required");
+       
+        return book;
 	}
 
 	@Override
@@ -68,12 +68,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Category UpdateCategory(Category c) {
-		/*Category ct=dao.getOne(c.getCategoryId());
-		if(ct!=null) {
-			ct.setCategoryName(c.getCategoryName());
-		}
-		return dao.save(ct);
-		*/
+		
 		Category ct=dao.getOne(c.getCategoryId());
 		if(ct!=null) {
 			ct.setCategoryName(c.getCategoryName());
@@ -84,26 +79,10 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return dao.save(ct);
 		
-		/*
-		if(validateCategory(c)) {
-			try {
-				Category ct=dao.getOne(c.getCategoryId());
-				ct.setCategoryName(c.getCategoryName());
-				dao.save(ct);
-			}
-			catch(Exception e) {
-				throw new CategoryProjectException(ErrorCode.SYSTEM_EXCEPTION, ACTION_1, e);
-				//CategoryException(ErrorCode.BAD_DATA,"Category Name should not be empty");
-			}
-			return c;
-		}
-		throw new CategoryException(ErrorCode.BAD_DATA,"Category Name should not be empty");
-		*/
 	}
 
 	@Override
 	public Optional<Category> getCategoryById(int cid) {
-		
 		return dao.findById(cid);
 	}
 
@@ -124,7 +103,7 @@ public class AdminServiceImpl implements AdminService {
 	        } 
 	        
 	        catch (Exception e) {
-	            throw new CategoryProjectException(ErrorCode.SYSTEM_EXCEPTION,"Can not delete the category as it contains books", e);
+	            throw new CategoryException(ErrorCode.SYSTEM_EXCEPTION,"Can not delete the category as it contains books", e);
 	        }	
 	
 	}
@@ -143,22 +122,19 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Book updateBook(Book book) {
-		Book b=dao1.getOne(book.getBook_id());
-		if(b!=null)
+		
+		
+		if(book!=null)
 		{
-			b.setTitle(book.getTitle());
-			b.setAuthor(book.getAuthor());
-			b.setDescription(book.getDescription());
-			b.setISBN(book.getISBN());
-			b.setPrice(book.getPrice());
-			b.setPublished_Date(book.getPublished_Date());
-			b.setIcon(book.getIcon());
-		}
-       if(!validateBook(book)) {
+			book.setTitle(book.getTitle());
+			book.setAuthor(book.getAuthor());
+			book.setDescription(book.getDescription());
+			book.setPrice(book.getPrice());
 			
-			throw new BookException(ErrorCode.BAD_DATA,"Book id should not be empty");
-					}
-		return dao1.save(b);
+		}
+		dao1.save(book);
+        validateBook(book);
+		return book;
 	}
 
 	@Override
@@ -183,12 +159,13 @@ public class AdminServiceImpl implements AdminService {
         if (book.getTitle() == null ||  book.getTitle().isEmpty()) {
             throw new CategoryException(ErrorCode.BAD_DATA, "Title should not be empty");
         }
+        if(book.getPrice() == 0)
+        {
+        	throw new CategoryException(ErrorCode.BAD_DATA, "Price has to be more than zero");
+        }
         return true;
     }
 	
-	
-	
-
 
 
 }

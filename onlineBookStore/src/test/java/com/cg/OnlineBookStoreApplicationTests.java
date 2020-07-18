@@ -45,6 +45,38 @@ class OnlineBookStoreApplicationTests {
 		assertEquals("Horror",c.getCategoryName());
 	}
 	
+	  @Test
+	  public void addBookTest(){
+	  Book b=new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
+	  as.addBook(b);
+	  assertEquals("The Subtle art",b.getTitle());
+	  }
+	  
+	  @Test
+	public void removeBookTest(){ 
+		Book b=new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
+		bd.findById(201);
+		crep.delete(b);
+        verify(crep,times(1)).delete(b);
+	}
+	/*
+	@Test
+	public void getAllBooksTest() {
+		List<BookInfo> bookinfo=new ArrayList<>();
+		bookinfo.add(null);
+		bookinfo.add(null);
+		Mockito.when(bd.getBookNames()).thenReturn(bookinfo);
+		
+		List<BookInfo> returnedData=bd.getBookNames();
+		assertEquals(2,returnedData.size());
+	}
+	@Test
+	public void getAllCategoryTest(){
+	
+	}
+	 */
+	
+	  
 	@Test
 	public void UpdateCategoryTest() {
 		Category c=new Category(101,"Horror",null);

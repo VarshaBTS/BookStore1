@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Book {
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(targetEntity=Category.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(targetEntity=Category.class,cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="CategoryId")
 	public Category category;
 	
@@ -117,7 +117,7 @@ public class Book {
 		this.title = title;
 		this.author = author;
 		this.description = description;
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 		this.price = price;
 		
 		

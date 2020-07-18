@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.cg.entity.Book;
 import com.cg.entity.Category;
 
 @Repository
@@ -14,4 +15,6 @@ public interface CategoryDao extends JpaRepository<Category, Integer> {
 	@Modifying
 	@Query(value = "DELETE FROM Category  Where CategoryId = :CategoryId")
 	void removeCategory(@Param("CategoryId") int CategoryId);
+
+	
 }
