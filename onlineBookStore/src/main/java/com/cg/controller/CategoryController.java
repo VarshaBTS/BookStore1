@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ import com.cg.service.AdminService;
 public class CategoryController {
 	@Autowired
 	private AdminService service;
+	
+	@Value("happy")
+	private String shreya;
 	
 	@PostMapping("/create")
 	public ResponseEntity<String> addCategory(@RequestBody Category category ) {
@@ -63,7 +67,7 @@ public class CategoryController {
 	public ResponseEntity<List<Category>> getAllCategory() {
 		List<Category> catlist = service.getAllCategory();
 		return new ResponseEntity<List<Category>>(catlist, new HttpHeaders(), HttpStatus.OK);
-
+		
 	}
 	
 	@DeleteMapping(path="/deleteCat/{CategoryId}")

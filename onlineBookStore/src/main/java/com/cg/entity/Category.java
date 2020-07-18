@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +25,7 @@ public class Category {
 	@Column(length=12)   
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int CategoryId;
+	@Value("Horror")
 	@Column(length=50)
 	public String CategoryName;
 	

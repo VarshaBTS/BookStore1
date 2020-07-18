@@ -15,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -39,6 +40,7 @@ public class Book {
 	@Column(length=200)
 	private String description;
 	@Column(length=10)
+	@Value("${Book.ISBN}")
 	private int ISBN;
 	@Column(length=10)
 	private float price;
