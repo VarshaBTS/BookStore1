@@ -11,7 +11,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +55,6 @@ class OnlineBookStoreApplicationTests {
 	  assertEquals("The Subtle art",b.getTitle());
 	  }
 	  
-//	  @Test
-//	public void removeBookTest(){ 
-//		Book b=new Book(201,"The Subtle art","siri","breathtaking experience",1123,200);
-//		bd.findById(201);
-//		crep.delete(b);
-//        verify(crep,times(1)).delete(b);
-//	}
 	
 	@Test
 	public void listOfBookTest() {
@@ -72,8 +64,8 @@ class OnlineBookStoreApplicationTests {
 		when(bd.findAll()).thenReturn(bookinfo);
 		List<Book> result = as.listOfBook();
 		assertEquals(2, result.size());
-		
 	}
+	
 	@Test
 	public void getAllCategoryTest(){
 			List<Category> CategoryList = new ArrayList<Category>();

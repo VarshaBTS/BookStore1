@@ -25,11 +25,10 @@ public class Category {
 	@Column(length=12)   
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int categoryId;
-	@Value("Horror")
+	
 	@Column(length=50)
 	public String categoryName;
-	
-	//@JsonBackReference
+	@JsonBackReference
 	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
 	
@@ -51,7 +50,7 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
-	@JsonIgnore
+	
 	public List<Book> getBooks() {
 		return books;
 	}
