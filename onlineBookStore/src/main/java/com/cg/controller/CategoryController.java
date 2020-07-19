@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,25 +22,24 @@ import com.cg.service.AdminService;
 @RestController
 @RequestMapping("/bookstore")
 public class CategoryController {
+	
 	@Autowired
 	private AdminService service;
 	
-	@Value("happy")
-	private String shreya;
 	
 	@PostMapping("/create")
 	public ResponseEntity<String> addCategory(@RequestBody Category category ) {
 		    service.addCategory(category);
 			ResponseEntity<String> responseEntity = new ResponseEntity<String>("Added succesfully",HttpStatus.OK);
 			return responseEntity;
-		}
+	}
 
 	
 	@PostMapping("/createbook")
 	public Book addBook(@RequestBody Book book ) {
 			Book b=service.addBook(book);
 			return b;
-		}
+	}
 	
 	@PutMapping("/assignBookToCat/{categoryId}/{book_id}")
 	public Book assignbooktoC(@PathVariable(value="categoryId")int categoryId,
