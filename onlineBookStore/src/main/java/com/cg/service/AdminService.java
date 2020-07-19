@@ -14,7 +14,7 @@ public interface AdminService {
 	List<Category> getAllCategory();
 	List<Book> listOfBook();
 	public Book updateBook (Book book);
-	String removeCategory(Integer CategoryId);
+	String removeCategory(Integer categoryId);
 	String removeBook(Integer bid);
 
 }

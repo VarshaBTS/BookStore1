@@ -24,29 +24,31 @@ public class Category {
 	@Id   
 	@Column(length=12)   
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int CategoryId;
+	public int categoryId;
 	@Value("Horror")
 	@Column(length=50)
-	public String CategoryName;
+	public String categoryName;
 	
 	//@JsonBackReference
 	@OneToMany(mappedBy="category")
 	private List<Book> books = new ArrayList<Book>();
+	
+	
 
 	public int getCategoryId() {
-		return CategoryId;
+		return categoryId;
 	}
 
 	public void setCategoryId(int categoryId) {
-		CategoryId = categoryId;
+		this.categoryId = categoryId;
 	}
 
 	public String getCategoryName() {
-		return CategoryName;
+		return categoryName;
 	}
 
 	public void setCategoryName(String categoryName) {
-		CategoryName = categoryName;
+		this.categoryName = categoryName;
 	}
 
 	@JsonIgnore
@@ -59,12 +61,14 @@ public class Category {
 	}
 
 	public Category() {}
+
 	public Category(int categoryId, String categoryName, List<Book> books) {
-		
-		CategoryId = categoryId;
-		CategoryName = categoryName;
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
 		this.books = books;
 	}
+	
 	
 	
 	

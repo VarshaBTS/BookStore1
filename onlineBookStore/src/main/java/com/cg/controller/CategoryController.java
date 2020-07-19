@@ -30,10 +30,10 @@ public class CategoryController {
 	private String shreya;
 	
 	@PostMapping("/create")
-	public ResponseEntity<String> addCategory(@RequestBody Category category ) {
-			service.addCategory(category);
+	public Category addCategory(@RequestBody Category category ) {
+		Category c=service.addCategory(category);
 			ResponseEntity<String> responseEntity = new ResponseEntity<String>("added succesfully",HttpStatus.OK);
-			return responseEntity;
+			return c;
 		}
 
 	
@@ -43,10 +43,10 @@ public class CategoryController {
 			return b;
 		}
 	
-	@PutMapping("/assignBookToCat/{CategoryId}/{book_id}")
-	public Book assignbooktoC(@PathVariable(value="CategoryId")int CategoryId,
+	@PutMapping("/assignBookToCat/{categoryId}/{book_id}")
+	public Book assignbooktoC(@PathVariable(value="categoryId")int categoryId,
 			@PathVariable(value="book_id")int book_id) {
-		return service.btoC(CategoryId, book_id);
+		return service.btoC(categoryId, book_id);
 		
 	}
 	
@@ -56,9 +56,9 @@ public class CategoryController {
 		
 	}
 	
-	@GetMapping("/category/{CategoryId}")
-	public Optional<Category> getCategory(@PathVariable("CategoryId") int CategoryId) {
-		Optional<Category> cat=service.getCategoryById(CategoryId);
+	@GetMapping("/category/{categoryId}")
+	public Optional<Category> getCategory(@PathVariable("categoryId") int categoryId) {
+		Optional<Category> cat=service.getCategoryById(categoryId);
 		return cat;
 		
 	}
@@ -70,10 +70,10 @@ public class CategoryController {
 		
 	}
 	
-	@DeleteMapping(path="/deleteCat/{CategoryId}")
-	public ResponseEntity<String> removeCategory(@PathVariable int CategoryId) {
+	@DeleteMapping(path="/deleteCat/{categoryId}")
+	public ResponseEntity<String> removeCategory(@PathVariable int categoryId) {
 		
-		ResponseEntity<String> rs =  new ResponseEntity<String>(service.removeCategory(CategoryId),HttpStatus.OK);
+		ResponseEntity<String> rs =  new ResponseEntity<String>(service.removeCategory(categoryId),HttpStatus.OK);
 		
 		return rs;
 	} 

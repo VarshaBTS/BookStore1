@@ -13,8 +13,8 @@ import com.cg.entity.Category;
 public interface CategoryDao extends JpaRepository<Category, Integer> {
 
 	@Modifying
-	@Query(value = "DELETE FROM Category  Where CategoryId = :CategoryId")
-	void removeCategory(@Param("CategoryId") int CategoryId);
+	@Query(value = "DELETE FROM Category  Where categoryId = :categoryId")
+	void removeCategory(@Param("categoryId") int categoryId);
 
 	
 }

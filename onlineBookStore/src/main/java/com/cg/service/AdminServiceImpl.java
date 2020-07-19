@@ -92,13 +92,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public String removeCategory(Integer CategoryId) {
-		 if (CategoryId == null) {
+	public String removeCategory(Integer categoryId) {
+		 if (categoryId == null) {
 	            throw new CategoryException(ErrorCode.BAD_DATA, "Valid CategoryId is required");
 	        }
 		 
 	        try {
-			 dao.removeCategory(CategoryId);	
+			 dao.removeCategory(categoryId);	
 			 return "deleted";
 	        } 
 	        
