@@ -81,7 +81,7 @@ class OnlineBookStoreApplicationTests {
 	public void UpdateCategoryTest() {
 		Category c=new Category(101,"Horror",null);
 		c.setCategoryName("fantasy");
-		as.UpdateCategory(c);
+		as.UpdateCategory(101,"fantasy");
 		assertEquals("fantasy",c.getCategoryName());
 	}
 	

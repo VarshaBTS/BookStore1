@@ -1,6 +1,8 @@
 package com.cg.entity;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.Basic;
 
@@ -24,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="book")
 public class Book {
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@ManyToOne(targetEntity=Category.class,fetch=FetchType.EAGER)
 	@JoinColumn(name="CategoryId")
 	public Category category;
@@ -33,14 +35,14 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(length=10)
 	private int book_id;
-	@Column(length=128)
+	@Column(length=128, unique=true)
 	private String title;
 	@Column(length=64)
 	private String author;
 	@Column(length=200)
 	private String description;
-	@Column(length=10)
-	private int ISBN;
+	@Column(length=13)
+	private long ISBN;
 	@Column(length=10)
 	private float price;
 	private Date published_Date;
@@ -82,10 +84,10 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getISBN() {
+	public long getISBN() {
 		return ISBN;
 	}
-	public void setISBN(int iSBN) {
+	public void setISBN(long iSBN) {
 		ISBN = iSBN;
 	}
 	public float getPrice() {

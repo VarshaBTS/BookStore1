@@ -24,7 +24,7 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int categoryId;
 	
-	@Column(length=50)
+	@Column(length=50, unique=true)
 	public String categoryName;
 	@JsonBackReference
 	@OneToMany(mappedBy="category")

@@ -28,6 +28,14 @@ public class AdminServiceImpl implements AdminService {
 	
 	private static final String ACTION_1 = "Exception while writing data to persistant layer";
 	
+	/*******************************************************************************************************
+	 * Function Name : addCategory 
+	 * Input Parameters :  category
+	 * Return Type : category 
+	 * Throws : CategoryException
+	 * Description : to add a Category
+	 ********************************************************************************************************/
+	
 	@Override
 	public Category addCategory(Category category) {
 		 if (validateCategory(category)) {
@@ -41,6 +49,14 @@ public class AdminServiceImpl implements AdminService {
 		   return category;
 	}
 
+	/*******************************************************************************************************
+	 * Function Name : addBook 
+	 * Input Parameters :  book
+	 * Return Type : book 
+	 * Throws : CategoryException
+	 * Description : to add a Book
+	 ********************************************************************************************************/
+	
 	@Override
 	public Book addBook(Book book) {
 		if (validateBook(book)) {
@@ -55,6 +71,14 @@ public class AdminServiceImpl implements AdminService {
         return book;
 	}
 
+
+	/*******************************************************************************************************
+	 * Function Name : btoC 
+	 * Input Parameters :  cid, bid
+	 * Return Type : book 
+	 * Description : to assign a Book
+	 ********************************************************************************************************/
+	
 	@Override
 	public Book btoC(int cid, int bid) {
 		
@@ -66,30 +90,71 @@ public class AdminServiceImpl implements AdminService {
 		return dao1.save(b);
 	}
 
+	
+
+	/*******************************************************************************************************
+	 * Function Name : UpdateCategory 
+	 * Input Parameters :  c, n
+	 * Return Type : Category 
+	 * Throws : CategoryException
+	 * Description : to update a category
+	 ********************************************************************************************************/
+	
 	@Override
-	public Category UpdateCategory(Category c) {
+	public Category UpdateCategory(Integer c,String n) {
+		Category ct;
+		if (c == null) {
+            throw new CategoryException(ErrorCode.BAD_DATA, "Valid CategoryId is required");
+        }
+		else {
+			ct=dao.getOne(c);
+			if(ct!=null) {
+				ct.setCategoryName(n);
+				dao.save(ct);
+				if(!validateCategory(ct)) {
+					throw new CategoryException(ErrorCode.BAD_DATA,"Category Name should not be empty");
+				}
+		}
 		
-		Category ct=dao.getOne(c.getCategoryId());
-		if(ct!=null) {
-			ct.setCategoryName(c.getCategoryName());
-			dao.save(ct);
-			if(!validateCategory(c)) {
-				throw new CategoryException(ErrorCode.BAD_DATA,"Category Name should not be empty");
-			}
+		
 		}
 		return dao.save(ct);
 		
 	}
 
-	@Override
-	public Optional<Category> getCategoryById(int cid) {
-		return dao.findById(cid);
-	}
+	
 
+	/*******************************************************************************************************
+	 * Function Name : getCategoryBId 
+	 * Input Parameters :  cid
+	 * Return Type : Category 
+	 * Description : to get Books
+	 ********************************************************************************************************/
+	
+	@Override
+	public List<Book> getCategoryBId(int cid) {
+		List<Book> c=dao1.getBookByCatID(cid);
+		return c;
+	}
+	
+	/*******************************************************************************************************
+	 * Function Name : getAllCategory 
+	 * Return Type : Category 
+	 * Description : to get Category
+	 ********************************************************************************************************/
+	
 	@Override
 	public List<Category> getAllCategory(){
 		return dao.findAll();
 	}
+	
+	/*******************************************************************************************************
+	 * Function Name : removeCategory 
+	 * Input Parameters :  categoryId
+	 * Return Type : String 
+	 * Throws : CategoryException
+	 * Description : to remove a category
+	 ********************************************************************************************************/
 	
 	@Override
 	public String removeCategory(Integer categoryId) {
@@ -108,6 +173,14 @@ public class AdminServiceImpl implements AdminService {
 	
 	}
 	
+	/*******************************************************************************************************
+	 * Function Name : removeBook 
+	 * Input Parameters :  bid
+	 * Return Type : String 
+	 * Throws : CategoryException
+	 * Description : to remove a Book
+	 ********************************************************************************************************/
+	
 	@Override
 	public String removeBook(Integer bid) {
 		if(bid==null) {
@@ -120,27 +193,45 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	/*******************************************************************************************************
+	 * Function Name : updateBook 
+	 * Input Parameters :  book
+	 * Return Type : Book 
+	 * Description : to update a Book
+	 ********************************************************************************************************/
+	
 	@Override
 	public Book updateBook(Book book) {
 		
-		
-		if(book!=null)
+		Book b=dao1.getOne(book.getBook_id());
+		if(b!=null)
 		{
-			book.setTitle(book.getTitle());
-			book.setAuthor(book.getAuthor());
-			book.setDescription(book.getDescription());
-			book.setPrice(book.getPrice());
+			b.setTitle(book.getTitle());
+			b.setAuthor(book.getAuthor());
+			b.setDescription(book.getDescription());
+			b.setPrice(book.getPrice());
+			b.setISBN(book.getISBN());
 			
 		}
-		dao1.save(book);
-        validateBook(book);
-		return book;
+		dao1.save(b);
+        validateBook(b);
+		return b;
 	}
 
+	
 	@Override
 	public List<Book> listOfBook() {
 		return dao1.findAll();
 	}
+	
+	
+	/*******************************************************************************************************
+	 * Function Name : validateCategory 
+	 * Input Parameters :  category
+	 * Return Type : Boolean 
+	 * Throws : CategoryException
+	 * Description : to validate a Category
+	 ********************************************************************************************************/
 	
 	private Boolean validateCategory(Category category) {
         if (category.getCategoryName() == null || category.getCategoryName().isEmpty()) {
@@ -149,6 +240,14 @@ public class AdminServiceImpl implements AdminService {
         return true;
     }
 
+	/*******************************************************************************************************
+	 * Function Name : validateBook 
+	 * Input Parameters :  book
+	 * Return Type : Boolean 
+	 * Throws : CategoryException
+	 * Description : to validate a Book
+	 ********************************************************************************************************/
+	
 	private Boolean validateBook(Book book) {
         if (book.getAuthor()== null || book.getAuthor().isEmpty()) {
             throw new CategoryException(ErrorCode.BAD_DATA, "Author Name should not be empty");
